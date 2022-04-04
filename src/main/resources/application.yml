@@ -1,8 +1,5 @@
 
 spring:
-  data:
-    rest:
-      base-path: /api
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
@@ -17,6 +14,10 @@ spring:
     properties:
       hibernate:
         '[format_sql]': true
+
+server:
+  servlet:
+    context-path: /api
 
 logging:
   level:
