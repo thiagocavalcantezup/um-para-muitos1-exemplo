@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-UmParaMuitos1ExemploApplication<um-para-muitos1-exemplo>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "br.com.zup.handora.umparamuitos1exemplo.UmParaMuitos1ExemploApplication",
+      "projectName": "um-para-muitos1-exemplo",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

@@ -17,8 +17,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Produto produto;
 
     @Column(nullable = false)
