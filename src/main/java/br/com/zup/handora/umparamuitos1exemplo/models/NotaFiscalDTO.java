@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public class NotaFiscalDTO {
     @PositiveOrZero
     private BigDecimal total;
 
+    @Valid
     @NotEmpty
     private Set<ItemDTO> itens;
 
