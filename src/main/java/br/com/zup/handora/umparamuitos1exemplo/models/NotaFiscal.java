@@ -3,6 +3,7 @@ package br.com.zup.handora.umparamuitos1exemplo.models;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class NotaFiscal {
     @PositiveOrZero
     private BigDecimal total;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     Set<Item> itens;
 
     /**
