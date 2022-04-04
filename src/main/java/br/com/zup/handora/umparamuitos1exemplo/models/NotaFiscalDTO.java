@@ -2,6 +2,7 @@ package br.com.zup.handora.umparamuitos1exemplo.models;
 
 import java.math.BigDecimal;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -25,6 +26,12 @@ public class NotaFiscalDTO {
         this.numero = numero;
         this.total = total;
         this.itens = itens;
+    }
+
+    public NotaFiscal toModel() {
+        Set<Item> novosItens = itens.stream().map(ItemDTO::toModel).collect(Collectors.toSet());
+
+        return new NotaFiscal(numero, total, novosItens);
     }
 
     public String getNumero() {

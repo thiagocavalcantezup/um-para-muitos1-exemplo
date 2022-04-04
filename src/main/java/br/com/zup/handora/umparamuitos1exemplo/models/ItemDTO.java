@@ -18,6 +18,10 @@ public class ItemDTO {
         this.quantidade = quantidade;
     }
 
+    public Item toModel() {
+        return new Item(new Produto(produtoId), quantidade);
+    }
+
     public Long getProdutoId() {
         return produtoId;
     }
