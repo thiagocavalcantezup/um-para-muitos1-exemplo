@@ -23,7 +23,6 @@ public class Contato {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
     private String empresa;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contato")

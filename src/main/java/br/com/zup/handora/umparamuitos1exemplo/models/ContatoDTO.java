@@ -2,6 +2,7 @@ package br.com.zup.handora.umparamuitos1exemplo.models;
 
 import java.util.Set;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -10,9 +11,9 @@ public class ContatoDTO {
     @NotBlank
     private String nome;
 
-    @NotBlank
     private String empresa;
 
+    @Valid
     @NotEmpty
     private Set<TelefoneDTO> telefones;
 

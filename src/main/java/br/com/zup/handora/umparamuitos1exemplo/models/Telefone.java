@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "telefones")
@@ -20,6 +21,7 @@ public class Telefone {
     private String tipo;
 
     @Column(nullable = false)
+    @Pattern(regexp = "^\\+[1-9][0-9]{2,15}$")
     private String numero;
 
     @ManyToOne(optional = false)
