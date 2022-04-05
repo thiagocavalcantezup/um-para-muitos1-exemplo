@@ -23,6 +23,16 @@ public class ContatoDTO {
         this.telefones = telefones;
     }
 
+    public Contato toModel() {
+        Contato contato = new Contato(nome, empresa);
+
+        telefones.forEach(telefoneDTO -> {
+            contato.adicionar(telefoneDTO.toModel());
+        });
+
+        return contato;
+    }
+
     public String getNome() {
         return nome;
     }

@@ -15,6 +15,10 @@ public class TelefoneDTO {
         this.numero = numero;
     }
 
+    public Telefone toModel() {
+        return new Telefone(tipo, numero);
+    }
+
     public String getTipo() {
         return tipo;
     }

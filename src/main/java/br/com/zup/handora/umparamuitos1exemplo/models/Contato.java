@@ -1,5 +1,6 @@
 package br.com.zup.handora.umparamuitos1exemplo.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,7 @@ public class Contato {
     private String empresa;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contato")
-    private Set<Telefone> telefones;
+    private Set<Telefone> telefones = new HashSet<>();
 
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
@@ -37,6 +38,11 @@ public class Contato {
     public Contato(String nome, String empresa) {
         this.nome = nome;
         this.empresa = empresa;
+    }
+
+    public void adicionar(Telefone telefone) {
+        telefone.setContato(this);
+        telefones.add(telefone);
     }
 
     public Long getId() {
