@@ -3,10 +3,18 @@ package br.com.zup.handora.umparamuitos1exemplo.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zup.handora.umparamuitos1exemplo.repositories.ContatoRepository;
+
 @RestController
 @RequestMapping(ContatoController.BASE_URI)
 public class ContatoController {
 
     public final static String BASE_URI = "/contatos";
+
+    private final ContatoRepository contatoRepository;
+
+    public ContatoController(ContatoRepository contatoRepository) {
+        this.contatoRepository = contatoRepository;
+    }
 
 }
