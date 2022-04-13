@@ -25,7 +25,8 @@ public class Contato {
 
     private String empresa;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "contato")
+    @OneToMany(cascade = {
+            CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "contato", orphanRemoval = true)
     private Set<Telefone> telefones = new HashSet<>();
 
     /**

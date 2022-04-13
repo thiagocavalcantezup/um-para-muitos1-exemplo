@@ -5,11 +5,15 @@ import java.net.URI;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.handora.umparamuitos1exemplo.models.Contato;
@@ -40,6 +44,22 @@ public class ContatoController {
                                            .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Contato contato = contatoRepository.findById(id)
+                                           .orElseThrow(
+                                               () -> new ResponseStatusException(
+                                                   HttpStatus.NOT_FOUND,
+                                                   "Não existe um contato com o id informado."
+                                               )
+                                           );
+
+        contatoRepository.delete(contato);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
