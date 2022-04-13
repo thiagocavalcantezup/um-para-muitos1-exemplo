@@ -28,8 +28,8 @@ public class NotaFiscal {
     @PositiveOrZero
     private BigDecimal total;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<Item> itens;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private Set<Item> itens;
 
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
