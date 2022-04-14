@@ -57,9 +57,16 @@ public class ContatoController {
                                                )
                                            );
 
-        contatoRepository.delete(contato);
+        if (contato.isAtivo()) {
+            throw new ResponseStatusException(
+                HttpStatus.UNPROCESSABLE_ENTITY, "Impossível remover um contato ativo."
+            );
+        } else {
+            contatoRepository.delete(contato);
 
-        return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();
+        }
+
     }
 
 }

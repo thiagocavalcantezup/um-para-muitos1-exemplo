@@ -29,6 +29,8 @@ public class Contato {
             CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "contato", orphanRemoval = true)
     private Set<Telefone> telefones = new HashSet<>();
 
+    private boolean ativo = true;
+
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
      */
@@ -51,6 +53,10 @@ public class Contato {
 
     public Set<Telefone> getTelefones() {
         return telefones;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
     }
 
 }
