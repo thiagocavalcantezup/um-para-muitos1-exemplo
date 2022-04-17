@@ -63,11 +63,11 @@ public class ContatoController {
             throw new ResponseStatusException(
                 HttpStatus.UNPROCESSABLE_ENTITY, "Impossível remover um contato ativo."
             );
-        } else {
-            contatoRepository.delete(contato);
-
-            return ResponseEntity.noContent().build();
         }
+
+        contatoRepository.delete(contato);
+
+        return ResponseEntity.noContent().build();
     }
 
     @Transactional
@@ -82,8 +82,13 @@ public class ContatoController {
                                                )
                                            );
 
-        contato.atualizar(contatoPatchDTO.getNome(), contatoPatchDTO.getEmpresa());
+        if (!contato.isAtivo()) {
+            throw new ResponseStatusException(
+                HttpStatus.UNPROCESSABLE_ENTITY, "Impossível atualizar um contato inativo."
+            );
+        }
 
+        contato.atualizar(contatoPatchDTO.getNome(), contatoPatchDTO.getEmpresa());
         contatoRepository.save(contato);
 
         return ResponseEntity.noContent().build();
