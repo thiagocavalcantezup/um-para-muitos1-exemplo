@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.handora.umparamuitos1exemplo.models.Contato;
 import br.com.zup.handora.umparamuitos1exemplo.models.ContatoDTO;
+import br.com.zup.handora.umparamuitos1exemplo.models.ContatoPatchDTO;
 import br.com.zup.handora.umparamuitos1exemplo.repositories.ContatoRepository;
 
 @RestController
@@ -66,7 +68,25 @@ public class ContatoController {
 
             return ResponseEntity.noContent().build();
         }
+    }
 
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id,
+                                       @RequestBody @Valid ContatoPatchDTO contatoPatchDTO) {
+        Contato contato = contatoRepository.findById(id)
+                                           .orElseThrow(
+                                               () -> new ResponseStatusException(
+                                                   HttpStatus.NOT_FOUND,
+                                                   "Não existe um contato com o id informado."
+                                               )
+                                           );
+
+        contato.atualizar(contatoPatchDTO.getNome(), contatoPatchDTO.getEmpresa());
+
+        contatoRepository.save(contato);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -47,12 +47,28 @@ public class Contato {
         telefones.add(telefone);
     }
 
+    public void atualizar(String nome, String empresa) {
+        this.nome = nome;
+
+        if (empresa != null) {
+            this.empresa = empresa;
+        }
+    }
+
     public Long getId() {
         return id;
     }
 
     public Set<Telefone> getTelefones() {
         return telefones;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
     public boolean isAtivo() {
