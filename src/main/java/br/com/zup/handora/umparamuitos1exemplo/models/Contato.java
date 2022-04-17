@@ -49,10 +49,7 @@ public class Contato {
 
     public void atualizar(String nome, String empresa) {
         this.nome = nome;
-
-        if (empresa != null) {
-            this.empresa = empresa;
-        }
+        this.empresa = empresa;
     }
 
     public Long getId() {
