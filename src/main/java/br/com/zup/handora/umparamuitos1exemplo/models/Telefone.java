@@ -33,6 +33,10 @@ public class Telefone {
     @Deprecated
     public Telefone() {}
 
+    public Telefone(Long id) {
+        this.id = id;
+    }
+
     public Telefone(String tipo, String numero) {
         this.tipo = tipo;
         this.numero = numero;
@@ -45,5 +49,27 @@ public class Telefone {
     public void setContato(Contato contato) {
         this.contato = contato;
     }
+
+    // SOURCE:
+    // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (!(o instanceof Telefone))
+            return false;
+
+        Telefone other = (Telefone) o;
+
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+    //
+    //
 
 }

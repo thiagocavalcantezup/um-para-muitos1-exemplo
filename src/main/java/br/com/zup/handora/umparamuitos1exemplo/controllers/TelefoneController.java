@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,7 @@ public class TelefoneController {
     }
 
     @Transactional
-    @PostMapping("/{contatoId}" + TelefoneController.BASE_URI)
+    @PostMapping
     public ResponseEntity<Void> telefoneCreate(@PathVariable Long contatoId,
                                                @RequestBody @Valid TelefoneDTO telefoneDTO,
                                                UriComponentsBuilder uriComponentsBuilder) {
@@ -55,6 +56,22 @@ public class TelefoneController {
         ).buildAndExpand(contatoId, telefone.getId()).toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long contatoId, @PathVariable Long id) {
+        Contato contato = contatoRepository.findById(contatoId)
+                                           .orElseThrow(
+                                               () -> new ResponseStatusException(
+                                                   HttpStatus.NOT_FOUND,
+                                                   "Não existe um contato com o id informado."
+                                               )
+                                           );
+
+        contato.remover(new Telefone(id));
+
+        return ResponseEntity.noContent().build();
     }
 
 }

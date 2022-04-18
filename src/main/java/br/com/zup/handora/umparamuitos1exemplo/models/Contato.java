@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.http.HttpStatus;
+
+import br.com.zup.handora.umparamuitos1exemplo.exceptions.TelefoneNaoEncontradoException;
+
 @Entity
 @Table(name = "contatos")
 public class Contato {
@@ -46,6 +50,15 @@ public class Contato {
     public void adicionar(Telefone telefone) {
         telefone.setContato(this);
         telefones.add(telefone);
+    }
+
+    public void remover(Telefone telefone) {
+        telefone.setContato(null);
+        if (!telefones.remove(telefone)) {
+            throw new TelefoneNaoEncontradoException(
+                HttpStatus.NOT_FOUND, "Não existe um telefone com o id informado."
+            );
+        }
     }
 
     public void atualizar(String nome, String empresa) {
