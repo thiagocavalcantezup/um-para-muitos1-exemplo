@@ -1,7 +1,7 @@
 package br.com.zup.handora.umparamuitos1exemplo.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Contato {
     @OneToMany(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REMOVE}, mappedBy = "contato", orphanRemoval = true)
-    private Set<Telefone> telefones = new HashSet<>();
+    private List<Telefone> telefones = new ArrayList<>();
 
     private boolean ativo = true;
 
@@ -70,7 +70,7 @@ public class Contato {
         return id;
     }
 
-    public Set<Telefone> getTelefones() {
+    public List<Telefone> getTelefones() {
         return telefones;
     }
 

@@ -50,26 +50,29 @@ public class Telefone {
         this.contato = contato;
     }
 
-    // SOURCE:
-    // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-
-        if (!(o instanceof Telefone))
-            return false;
-
-        Telefone other = (Telefone) o;
-
-        return id != null && id.equals(other.getId());
-    }
-
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
-    //
-    //
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Telefone other = (Telefone) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
 
 }
