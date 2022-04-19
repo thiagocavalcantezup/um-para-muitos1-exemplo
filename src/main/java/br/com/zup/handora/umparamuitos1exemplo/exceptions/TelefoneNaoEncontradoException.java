@@ -1,12 +1,13 @@
 package br.com.zup.handora.umparamuitos1exemplo.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class TelefoneNaoEncontradoException extends ResponseStatusException {
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class TelefoneNaoEncontradoException extends RuntimeException {
 
-    public TelefoneNaoEncontradoException(HttpStatus status, String reason) {
-        super(status, reason);
+    public TelefoneNaoEncontradoException(String message) {
+        super(message);
     }
 
 }

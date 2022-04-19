@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.http.HttpStatus;
-
 import br.com.zup.handora.umparamuitos1exemplo.exceptions.TelefoneNaoEncontradoException;
 
 @Entity
@@ -55,9 +53,7 @@ public class Contato {
     public void remover(Telefone telefone) {
         telefone.setContato(null);
         if (!telefones.remove(telefone)) {
-            throw new TelefoneNaoEncontradoException(
-                HttpStatus.NOT_FOUND, "Não existe um telefone com o id informado."
-            );
+            throw new TelefoneNaoEncontradoException("Não existe um telefone com o id informado.");
         }
     }
 
