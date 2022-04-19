@@ -97,6 +97,22 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(httpStatus).body(erroPadronizado);
     }
 
+    @ExceptionHandler(TelefoneNaoEncontradoException.class)
+    public ResponseEntity<ErroPadronizado> handleTelefoneNaoEncontrado(TelefoneNaoEncontradoException ex) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        Integer codigoHttp = httpStatus.value();
+        String mensagemHttp = httpStatus.getReasonPhrase();
+
+        String mensagemGeral = "Houve um problema com a sua requisição.";
+
+        ErroPadronizado erroPadronizado = new ErroPadronizado(
+            codigoHttp, mensagemHttp, mensagemGeral
+        );
+        erroPadronizado.adicionarErro(ex.getMessage());
+
+        return ResponseEntity.status(httpStatus).body(erroPadronizado);
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
